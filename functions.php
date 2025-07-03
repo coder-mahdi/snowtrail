@@ -134,6 +134,7 @@ function snowtrail_widgets_init() {
 }
 add_action( 'widgets_init', 'snowtrail_widgets_init' );
 
+
 /**
  * Enqueue scripts and styles.
  */
@@ -148,6 +149,7 @@ function snowtrail_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'snowtrail_scripts' );
+
 
 /**
  * Implement the Custom Header feature.
@@ -176,3 +178,34 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+
+// Register Custom Post Type: Trail
+function register_trail_cpt() {
+  $labels = array(
+    'name' => 'Trails',
+    'singular_name' => 'Trail',
+    'menu_name' => 'Trails',
+    'name_admin_bar' => 'Trail',
+    'add_new' => 'Add New',
+    'add_new_item' => 'Add New Trail',
+    'new_item' => 'New Trail',
+    'edit_item' => 'Edit Trail',
+    'view_item' => 'View Trail',
+    'all_items' => 'All Trails',
+    'search_items' => 'Search Trails',
+    'not_found' => 'No trails found',
+  );
+
+  $args = array(
+    'labels' => $labels,
+    'public' => true,
+    'has_archive' => false,
+    'rewrite' => array('slug' => 'trail'),
+    'supports' => array('title'), 
+    'show_in_rest' => true, 
+    'menu_icon' => 'dashicons-location-alt'
+  );
+
+  register_post_type('trail', $args);
+}
+add_action('init', 'register_trail_cpt');
