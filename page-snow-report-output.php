@@ -52,7 +52,7 @@ get_header();
       <area shape="rect" coords="540,100,640,200" href="#" data-trail="North" alt="North">
     </map>
 
-    <!-- Tooltip -->
+    <!-- Tooltip --->
     <div id="tooltip" style="display:none; position:absolute; background:#333; color:#fff; padding:5px 10px; border-radius:4px; font-size:14px; pointer-events: none;"></div>
   </div>
 
