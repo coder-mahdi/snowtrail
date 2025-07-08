@@ -1,38 +1,40 @@
-<svg viewBox="0 0 1200 1000" xmlns="http://www.w3.org/2000/svg" class="trail-map">
+<svg viewBox="0 0 1500 825" xmlns="http://www.w3.org/2000/svg" class="trail-map">
+
 
   <polygon 
     class="trail-shape" 
     id="orchard" 
     data-trail="Orchard"
-    points="402,342 368,682 383,683 416,344"
+    points="244,69,256,69,220,502,204,498"
   />
 
+  
   <polygon 
     class="trail-shape" 
     id="south" 
     data-trail="South"
-    points="547,642 550,377 561,375 560,641"
+    points="431,110,444,111,447,453,429,452"
   />
 
   <polygon 
     class="trail-shape" 
     id="village" 
     data-trail="Village"
-    points="754,425 743,425 728,655 743,658"
+    points="677,179,693,180,680,474,663,471"
   />
 
   <polygon 
     class="trail-shape" 
     id="valley" 
     data-trail="Valley"
-    points="938,474 925,469 899,672 910,673"
+    points="910,238,875,485,897,491,929,242"
   />
 
   <polygon 
     class="trail-shape" 
     id="north" 
     data-trail="North"
-    points="1086,472 1096,468 1112,668 1098,668"
+    points="1132,230,1117,233,1134,481,1154,477"
   />
 
 </svg>
