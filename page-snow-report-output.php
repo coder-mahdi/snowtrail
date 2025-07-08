@@ -15,7 +15,7 @@
 get_header();
 ?>
 
-	
+
 <main id="primary" class="site-main">
   <h1>Current Trail Status</h1>
 
@@ -40,20 +40,10 @@ get_header();
 
   <h2>Interactive Trail Map</h2>
 
-  <div class="map-container" style="position: relative;">
-    <img src="<?php echo get_template_directory_uri(); ?>/assets/trail-map.jpg" usemap="#trailmap" alt="Trail Map" width="800">
-
-    <map name="trailmap">
-      <!-- Adjust these coords based on your image -->
-      <area shape="rect" coords="100,100,200,200" href="#" data-trail="Orchard" alt="Orchard">
-      <area shape="rect" coords="210,100,310,200" href="#" data-trail="South" alt="South">
-      <area shape="rect" coords="320,100,420,200" href="#" data-trail="Village" alt="Village">
-      <area shape="rect" coords="430,100,530,200" href="#" data-trail="Valley" alt="Valley">
-      <area shape="rect" coords="540,100,640,200" href="#" data-trail="North" alt="North">
-    </map>
-
-    <!-- Tooltip --->
-    <div id="tooltip" style="display:none; position:absolute; background:#333; color:#fff; padding:5px 10px; border-radius:4px; font-size:14px; pointer-events: none;"></div>
+  <div class="map-container">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/trail-map.png" alt="Trail Map" class="trail-bg">
+    <?php get_template_part('template-parts/trail-map'); ?>
+    <div id="tooltip"></div>
   </div>
 
   <style>
@@ -62,46 +52,44 @@ get_header();
   </style>
 
   <script>
-    // JS object with trail statuses (from PHP)
-    const trailData = {
-      <?php
-      foreach ($trails as $trail) {
-        $status = get_field('status', $trail->ID);
-        echo "'" . esc_js($trail->post_title) . "': '" . esc_js(ucfirst($status)) . "',";
-      }
-      ?>
-    };
+    document.addEventListener("DOMContentLoaded", () => {
+      const shapes = document.querySelectorAll('polygon[data-trail]');
+      const tooltip = document.getElementById('tooltip');
 
-    const areas = document.querySelectorAll('area[data-trail]');
-    const tooltip = document.getElementById('tooltip');
+      const trailData = {
+        <?php
+        foreach ($trails as $trail) {
+          $status = get_field('status', $trail->ID);
+          echo "'" . esc_js($trail->post_title) . "': '" . esc_js(ucfirst($status)) . "',";
+        }
+        ?>
+      };
 
-    const showTooltip = (e, trail) => {
-      tooltip.innerText = trail + ': ' + trailData[trail];
-      tooltip.style.display = 'block';
-      tooltip.style.left = (e.pageX + 10) + 'px';
-      tooltip.style.top = (e.pageY + 10) + 'px';
-    };
+      const showTooltip = (shape, trail) => {
+        const status = trailData[trail];
+        const rect = shape.getBoundingClientRect();
+        tooltip.innerText = `${trail}: ${status}`;
+        tooltip.style.left = `${rect.left + rect.width / 2}px`;
+        tooltip.style.top = `${rect.top - 30}px`;
+        tooltip.style.display = 'block';
+      };
 
-    const hideTooltip = () => {
-      tooltip.style.display = 'none';
-    };
+      const hideTooltip = () => {
+        tooltip.style.display = 'none';
+      };
 
-    areas.forEach(area => {
-      const trail = area.dataset.trail;
+      shapes.forEach(shape => {
+        const trail = shape.dataset.trail;
+        const status = trailData[trail];
 
-      // Hover (Desktop)
-      area.addEventListener('mouseover', (e) => showTooltip(e, trail));
-      area.addEventListener('mousemove', (e) => {
-        tooltip.style.left = (e.pageX + 10) + 'px';
-        tooltip.style.top = (e.pageY + 10) + 'px';
-      });
-      area.addEventListener('mouseout', hideTooltip);
+        shape.classList.add(status.toLowerCase());
 
-      // Click (Mobile / Touch)
-      area.addEventListener('click', (e) => {
-        e.preventDefault();
-        showTooltip(e, trail);
-        setTimeout(hideTooltip, 3000); // Hide after 3 seconds
+        shape.addEventListener('mouseover', () => showTooltip(shape, trail));
+        shape.addEventListener('mouseout', hideTooltip);
+        shape.addEventListener('click', () => {
+          showTooltip(shape, trail);
+          setTimeout(hideTooltip, 3000);
+        });
       });
     });
   </script>
