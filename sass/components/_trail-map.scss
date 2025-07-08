@@ -1,0 +1,54 @@
+// assets/sass/components/_trail-map.scss
+
+.map-container {
+  position: relative;
+  width: 100%;
+  max-width: 825px;
+
+  .trail-bg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .trail-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+  }
+
+  .trail-shape {
+    pointer-events: all;
+    stroke: #000;
+    stroke-width: 2;
+    fill: #ccc;
+    transition: fill 0.3s, filter 0.3s;
+
+    &.open {
+      fill: #4caf50;
+    }
+
+    &.closed {
+      fill: #f44336;
+    }
+
+    &:hover {
+      filter: drop-shadow(0 0 6px rgba(0,0,0,0.4));
+    }
+  }
+
+  #tooltip {
+    display: none;
+    position: absolute;
+    background: #333;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 100;
+  }
+}
