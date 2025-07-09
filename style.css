@@ -828,7 +828,7 @@ textarea {
 .map-container {
   position: relative;
   width: 100%;
-  max-width: 800px;
+  max-width: 825px;
 }
 .map-container .trail-bg {
   width: 100%;
@@ -844,20 +844,16 @@ textarea {
   pointer-events: none;
 }
 .map-container .trail-shape {
-  pointer-events: all;
-  stroke: #000;
+  fill: transparent;
+  stroke: #ffffff;
   stroke-width: 2;
-  fill: #ccc;
-  transition: fill 0.3s, filter 0.3s;
-}
-.map-container .trail-shape.open {
-  fill: #4caf50;
-}
-.map-container .trail-shape.closed {
-  fill: #f44336;
+  transition: all 0.3s ease;
+  pointer-events: all;
 }
 .map-container .trail-shape:hover {
-  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.4));
+  fill: rgba(255, 255, 255, 0.4);
+  stroke: #ffffff;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
 }
 .map-container #tooltip {
   display: none;
