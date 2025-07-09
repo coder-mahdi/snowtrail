@@ -1,24 +1,18 @@
 <?php
 /**
- * The template for displaying all pages
- *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site may use a
- * different template.
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * Snow Trail Status Update Form
  *
  * @package SnowTrail
  */
 
+$success_message = '';
+
+// Process form submission
 if (isset($_POST['submit_status']) && isset($_POST['trail_status'])) {
   foreach ($_POST['trail_status'] as $trail_id => $new_status) {
-    update_field('status', sanitize_text_field($new_status), intval($trail_id));
+    update_post_meta(intval($trail_id), 'status', sanitize_text_field($new_status));
   }
-
-  wp_redirect(add_query_arg('updated', 'true', get_permalink()));
-  exit;
+  $success_message = 'Status updated successfully!';
 }
 
 get_header();
@@ -28,8 +22,8 @@ get_header();
   <div class="snow-trail-form">
     <h1>Update Trail Status</h1>
 
-    <?php if (isset($_GET['updated']) && $_GET['updated'] === 'true'): ?>
-      <div class="success-message">Status updated successfully!</div>
+    <?php if ($success_message): ?>
+      <div class="success-message"><?php echo $success_message; ?></div>
     <?php endif; ?>
 
     <form method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" id="trail-status-form">
@@ -41,22 +35,28 @@ get_header();
         'order' => 'ASC'
       ]);
 
-      foreach ($trails as $trail) {
-        $status = get_field('status', $trail->ID);
-        ?>
-        <div class="trail-item">
-          <label for="trail_<?php echo $trail->ID; ?>">
-            <?php echo esc_html($trail->post_title); ?>
-          </label>
-          <select name="trail_status[<?php echo $trail->ID; ?>]" id="trail_<?php echo $trail->ID; ?>">
-            <option value="open" <?php selected($status, 'open'); ?>>Open</option>
-            <option value="closed" <?php selected($status, 'closed'); ?>>Closed</option>
-          </select>
-        </div>
-        <?php
+      if (empty($trails)) {
+        echo '<p>No trails found. Please create some trails first.</p>';
+      } else {
+        foreach ($trails as $trail) {
+          $status = get_post_meta($trail->ID, 'status', true);
+          ?>
+          <div class="trail-item">
+            <label for="trail_<?php echo $trail->ID; ?>">
+              <?php echo esc_html($trail->post_title); ?>
+            </label>
+            <select name="trail_status[<?php echo $trail->ID; ?>]" id="trail_<?php echo $trail->ID; ?>">
+              <option value="open" <?php selected($status, 'open'); ?>>Open</option>
+              <option value="closed" <?php selected($status, 'closed'); ?>>Closed</option>
+            </select>
+          </div>
+          <?php
+        }
       }
       ?>
-      <button type="submit" name="submit_status" class="submit-button" id="submit-btn">Save Status</button>
+      <?php if (!empty($trails)): ?>
+        <button type="submit" name="submit_status" class="submit-button" id="submit-btn">Save Status</button>
+      <?php endif; ?>
     </form>
   </div>
 </main>
