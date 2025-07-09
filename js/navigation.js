@@ -19,6 +19,7 @@
 		return;
 	}
 
+	const menuContainer = siteNavigation.querySelector( '.menu-container' );
 	const menu = siteNavigation.getElementsByTagName( 'ul' )[ 0 ];
 
 	// Hide menu toggle button if menu is empty and return early.
@@ -33,6 +34,11 @@
 
 	// Toggle the .toggled class and the aria-expanded value each time the button is clicked.
 	button.addEventListener( 'click', function() {
+		console.log('Menu button clicked!');
+		if ( menuContainer ) {
+			menuContainer.classList.toggle( 'toggled' );
+			console.log('Menu container toggled:', menuContainer.classList.contains('toggled'));
+		}
 		siteNavigation.classList.toggle( 'toggled' );
 
 		if ( button.getAttribute( 'aria-expanded' ) === 'true' ) {
@@ -47,6 +53,9 @@
 		const isClickInside = siteNavigation.contains( event.target );
 
 		if ( ! isClickInside ) {
+			if ( menuContainer ) {
+				menuContainer.classList.remove( 'toggled' );
+			}
 			siteNavigation.classList.remove( 'toggled' );
 			button.setAttribute( 'aria-expanded', 'false' );
 		}
