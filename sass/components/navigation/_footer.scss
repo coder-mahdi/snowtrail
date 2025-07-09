@@ -1,0 +1,34 @@
+/* Footer Styles for SnowTrail */
+
+.site-footer {
+  background: #ffffff;
+  padding: 1rem 0;
+  text-align: center;
+  border-top: 1px solid #f0f0f0;
+}
+
+.site-info {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.site-info a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.site-info a:hover {
+  color: #0066cc;
+}
+
+.site-info .sep {
+  color: #ccc;
+  margin: 0 0.5rem;
+  font-weight: 300;
+} 
