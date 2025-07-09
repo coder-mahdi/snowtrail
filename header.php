@@ -26,34 +26,27 @@
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'snowtrail' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$snowtrail_description = get_bloginfo( 'description', 'display' );
-			if ( $snowtrail_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $snowtrail_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
-
 		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'snowtrail' ); ?></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="hamburger-icon">
+					<span></span>
+					<span></span>
+					<span></span>
+				</span>
+				<span class="screen-reader-text"><?php esc_html_e( 'Primary Menu', 'snowtrail' ); ?></span>
+			</button>
+			<div class="menu-container">
+				<ul id="primary-menu" class="menu nav-menu">
+					<li class="menu-item">
+						<a href="<?php echo esc_url( home_url( '/snow-report-output/' ) ); ?>"><?php esc_html_e( 'Home', 'snowtrail' ); ?></a>
+					</li>
+					<li class="menu-item">
+						<a href="<?php echo esc_url( home_url( '/snow-report-form/' ) ); ?>"><?php esc_html_e( 'Snow Report Form', 'snowtrail' ); ?></a>
+					</li>
+					<li class="menu-item">
+						<a href="<?php echo esc_url( home_url( '/snow-report-output/' ) ); ?>"><?php esc_html_e( 'Snow Report Output', 'snowtrail' ); ?></a>
+					</li>
+				</ul>
+			</div>
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->

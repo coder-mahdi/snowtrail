@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Get trail data from data attribute
   const mapContainer = document.querySelector('.map-container');
   const trailData = mapContainer ? JSON.parse(mapContainer.dataset.trails || '{}') : {};
+  
+  // Debug: log the trail data
+  console.log('Trail Data:', trailData);
+  console.log('Available trails:', Object.keys(trailData));
 
   const showTooltip = (e, shape, trail) => {
     const status = trailData[trail];
@@ -52,6 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
   shapes.forEach(shape => {
     const trail = shape.dataset.trail;
     const status = trailData[trail];
+
+    console.log('Processing shape for trail:', trail, 'Status:', status);
 
     if (status) {
       shape.classList.add(status.toLowerCase());
