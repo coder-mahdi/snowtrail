@@ -100,3 +100,110 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 /* Alignments
 --------------------------------------------- */
 @import "utilities/alignments";
+
+/*--------------------------------------------------------------
+# Mobile Form Fixes
+--------------------------------------------------------------*/
+
+// Mobile-specific form improvements
+@media (max-width: 768px) {
+  .snow-trail-form {
+    margin: 0.5rem;
+    padding: 1rem;
+    
+    .submit-button {
+      // Improve touch target size
+      min-height: 44px;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      
+      // Prevent zoom on focus
+      font-size: 16px;
+      
+      // Better touch feedback
+      -webkit-tap-highlight-color: rgba(52, 152, 219, 0.3);
+      touch-action: manipulation;
+      
+      &:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+      }
+      
+      &.loading {
+        pointer-events: none;
+        opacity: 0.7;
+      }
+    }
+    
+    .trail-item {
+      select {
+        // Prevent zoom on focus
+        font-size: 16px;
+        
+        // Better touch target
+        min-height: 44px;
+        padding: 0.75rem 1rem;
+        
+        // Improve touch interaction
+        -webkit-tap-highlight-color: rgba(52, 152, 219, 0.1);
+        touch-action: manipulation;
+      }
+    }
+  }
+  
+  // Prevent form zoom on iOS
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+  
+  // Improve form submission on mobile
+  form {
+    -webkit-overflow-scrolling: touch;
+    
+    button[type="submit"] {
+      // Ensure button is clickable
+      position: relative;
+      z-index: 10;
+      
+      // Prevent double-tap zoom
+      touch-action: manipulation;
+      
+      // Better visual feedback
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+}
+
+// Additional mobile fixes
+@media (max-width: 480px) {
+  .snow-trail-form {
+    .trail-item {
+      padding: 0.75rem;
+      
+      label {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      select {
+        padding: 0.625rem 0.875rem;
+        font-size: 0.95rem;
+      }
+    }
+    
+    .submit-button {
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+  }
+}
