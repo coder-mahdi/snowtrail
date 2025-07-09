@@ -2,6 +2,10 @@
 --------------------------------------------- */
 @import "navigation/navigation";
 
+/* Header
+--------------------------------------------- */
+@import "navigation/header";
+
 /* Posts and pages
 --------------------------------------------- */
 @import "content/posts-and-pages";
@@ -26,4 +30,10 @@
 --------------------------------------------- */
 @import "media/galleries";
 
+/* Trail Map
+--------------------------------------------- */
 @import "_trail-map.scss";
+
+/* Tooltip
+--------------------------------------------- */
+@import "_tooltip.scss";
