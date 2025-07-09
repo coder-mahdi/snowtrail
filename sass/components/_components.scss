@@ -2,6 +2,14 @@
 --------------------------------------------- */
 @import "navigation/navigation";
 
+/* Header
+--------------------------------------------- */
+@import "navigation/header";
+
+/* Footer
+--------------------------------------------- */
+@import "navigation/footer";
+
 /* Posts and pages
 --------------------------------------------- */
 @import "content/posts-and-pages";
@@ -26,4 +34,18 @@
 --------------------------------------------- */
 @import "media/galleries";
 
+/* Trail Map
+--------------------------------------------- */
 @import "_trail-map.scss";
+
+/* Trail Status
+--------------------------------------------- */
+@import "_trail-status.scss";
+
+/* Tooltip
+--------------------------------------------- */
+@import "_tooltip.scss";
+
+/* Snow Trail Form
+--------------------------------------------- */
+@import "_snow-trail-form.scss";
