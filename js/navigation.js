@@ -34,10 +34,8 @@
 
 	// Toggle the .toggled class and the aria-expanded value each time the button is clicked.
 	button.addEventListener( 'click', function() {
-		console.log('Menu button clicked!');
 		if ( menuContainer ) {
 			menuContainer.classList.toggle( 'toggled' );
-			console.log('Menu container toggled:', menuContainer.classList.contains('toggled'));
 		}
 		siteNavigation.classList.toggle( 'toggled' );
 

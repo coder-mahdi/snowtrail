@@ -1,0 +1,180 @@
+// Trail Status Component Styles
+// This file contains styles for the trail status display on the Snow Report page
+
+.trail-status {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #dee2e6;
+
+  h1 {
+    color: #2c3e50;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.5rem;
+  }
+
+  li {
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+
+    strong {
+      font-weight: 600;
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
+    }
+
+    // Open trail styles
+    &.open {
+      background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+      color: #155724;
+      border-color: #28a745;
+
+      &::before {
+        background: #28a745;
+      }
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 6px rgba(40, 167, 69, 0.15);
+        background: linear-gradient(135deg, #c3e6cb 0%, #b1dfbb 100%);
+      }
+    }
+
+    // Closed trail styles
+    &.closed {
+      background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+      color: #721c24;
+      border-color: #dc3545;
+
+      &::before {
+        background: #dc3545;
+      }
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 6px rgba(220, 53, 69, 0.15);
+        background: linear-gradient(135deg, #f5c6cb 0%, #f1b0b7 100%);
+      }
+    }
+  }
+
+  // Responsive design
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+
+    h1 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    ul {
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+    }
+
+    li {
+      padding: 0.4rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  // Dark mode support
+  @media (prefers-color-scheme: dark) {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    border-color: #495057;
+
+    h1 {
+      color: #ecf0f1;
+    }
+
+    li.open {
+      background: linear-gradient(135deg, #1e4d2b 0%, #155724 100%);
+      color: #d4edda;
+      border-color: #28a745;
+    }
+
+    li.closed {
+      background: linear-gradient(135deg, #4d1e1e 0%, #721c24 100%);
+      color: #f8d7da;
+      border-color: #dc3545;
+    }
+  }
+}
+
+// Additional utility classes for trail status
+.trail-status-summary {
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 4px;
+  backdrop-filter: blur(10px);
+
+  .summary-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+
+    .stat {
+      text-align: center;
+
+      .number {
+        font-size: 1.25rem;
+        font-weight: 600;
+        display: block;
+      }
+
+      .label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2px;
+        opacity: 0.8;
+      }
+
+      &.open-trails {
+        color: #28a745;
+      }
+
+      &.closed-trails {
+        color: #dc3545;
+      }
+    }
+  }
+} 

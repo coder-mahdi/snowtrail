@@ -1,0 +1,217 @@
+// Snow Trail Form Component
+.snow-trail-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #3498db, #2980b9);
+      border-radius: 2px;
+    }
+  }
+
+  .success-message {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    color: #155724;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #c3e6cb;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+    animation: slideInDown 0.5s ease-out;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .trail-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    label {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 0.75rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #3498db;
+      }
+    }
+
+    select {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: white;
+      color: #495057;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 0.75rem center;
+      background-repeat: no-repeat;
+      background-size: 1.5em 1.5em;
+      padding-right: 2.5rem;
+
+      &:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+
+      &:hover {
+        border-color: #3498db;
+      }
+    }
+
+    // Status-specific styling
+    select option[value="open"] {
+      color: #27ae60;
+      font-weight: 600;
+    }
+
+    select option[value="closed"] {
+      color: #e74c3c;
+      font-weight: 600;
+    }
+  }
+
+  .submit-button {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+
+    &:hover {
+      background: linear-gradient(135deg, #2980b9 0%, #1f5f8b 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .snow-trail-form {
+    margin: 1rem;
+    padding: 1.5rem;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .trail-item {
+      padding: 1rem;
+
+      label {
+        font-size: 1rem;
+      }
+
+      select {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+      }
+    }
+
+    .submit-button {
+      padding: 0.875rem 1.5rem;
+      font-size: 1rem;
+    }
+  }
+}
+
+// Animations
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Loading state
+.snow-trail-form.loading {
+  .submit-button {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+    cursor: not-allowed;
+    pointer-events: none;
+
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid transparent;
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: 8px;
+    }
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} 
