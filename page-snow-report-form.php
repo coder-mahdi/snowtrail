@@ -32,7 +32,7 @@ get_header();
       <div class="success-message">Status updated successfully!</div>
     <?php endif; ?>
 
-    <form method="post">
+    <form method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" id="trail-status-form">
       <?php
       $trails = get_posts([
         'post_type' => 'trail',
@@ -56,7 +56,7 @@ get_header();
         <?php
       }
       ?>
-      <button type="submit" name="submit_status" class="submit-button">Save Status</button>
+      <button type="submit" name="submit_status" class="submit-button" id="submit-btn">Save Status</button>
     </form>
   </div>
 </main>
