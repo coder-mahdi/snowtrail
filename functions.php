@@ -210,3 +210,13 @@ function register_trail_cpt() {
   register_post_type('trail', $args);
 }
 add_action('init', 'register_trail_cpt');
+
+// Fallback function for get_field if ACF is not active
+if (!function_exists('get_field')) {
+  function get_field($field_name, $post_id = false) {
+    if (!$post_id) {
+      $post_id = get_the_ID();
+    }
+    return get_post_meta($post_id, $field_name, true);
+  }
+}

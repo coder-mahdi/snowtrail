@@ -14,7 +14,7 @@
   margin: 0 auto;
   padding: 0 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: relative;
 }
@@ -22,7 +22,7 @@
 .menu-container {
   flex: 1;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 #primary-menu {
@@ -30,9 +30,10 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  width: 100%;
-  justify-content: space-between;
+  width: auto;
+  justify-content: center;
   align-items: center;
+  gap: 3rem;
 }
 
 .menu-item {
@@ -53,16 +54,6 @@
 .menu-item a:hover {
   background: #f0f8ff;
   color: #0066cc;
-}
-
-/* Home on the left */
-.menu-item:first-child {
-  margin-right: auto;
-}
-
-/* Right side menu items container */
-.menu-item:not(:first-child) {
-  margin-left: 1rem;
 }
 
 .menu-toggle {
@@ -167,23 +158,11 @@
   .menu-item a:hover {
     background: #f8f9fa;
   }
-  
-  .menu-item:first-child {
-    margin-right: 0; /* Reset margin for mobile */
-  }
-  
-  .menu-item:not(:first-child) {
-    margin-left: 0; /* Reset margin for mobile */
-  }
 }
 
 /* Tablet Styles */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   .main-navigation {
     padding: 0 1.5rem;
-  }
-  
-  .menu-item:not(:first-child) {
-    margin-left: 0.75rem;
   }
 } 

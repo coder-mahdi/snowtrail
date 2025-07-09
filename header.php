@@ -38,13 +38,10 @@
 			<div class="menu-container">
 				<ul id="primary-menu" class="menu nav-menu">
 					<li class="menu-item">
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'snowtrail' ); ?></a>
-					</li>
-					<li class="menu-item">
 						<a href="<?php echo esc_url( home_url( '/snow-report-form/' ) ); ?>"><?php esc_html_e( 'Snow Trail Form', 'snowtrail' ); ?></a>
 					</li>
 					<li class="menu-item">
-						<a href="<?php echo esc_url( home_url( '/snow-report-output/' ) ); ?>"><?php esc_html_e( 'Snow Trail Output', 'snowtrail' ); ?></a>
+						<a href="<?php echo esc_url( home_url( '/snow-report-output/' ) ); ?>"><?php esc_html_e( 'Snow Trail Status', 'snowtrail' ); ?></a>
 					</li>
 				</ul>
 			</div>
