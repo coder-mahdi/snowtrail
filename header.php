@@ -41,10 +41,10 @@
 						<a href="<?php echo esc_url( home_url( '/snow-report-output/' ) ); ?>"><?php esc_html_e( 'Home', 'snowtrail' ); ?></a>
 					</li>
 					<li class="menu-item">
-						<a href="<?php echo esc_url( home_url( '/snow-report-form/' ) ); ?>"><?php esc_html_e( 'Snow Report Form', 'snowtrail' ); ?></a>
+						<a href="<?php echo esc_url( home_url( '/snow-report-form/' ) ); ?>"><?php esc_html_e( 'Snow Trail Form', 'snowtrail' ); ?></a>
 					</li>
 					<li class="menu-item">
-						<a href="<?php echo esc_url( home_url( '/snow-report-output/' ) ); ?>"><?php esc_html_e( 'Snow Report Output', 'snowtrail' ); ?></a>
+						<a href="<?php echo esc_url( home_url( '/snow-report-output/' ) ); ?>"><?php esc_html_e( 'Snow Trail Output', 'snowtrail' ); ?></a>
 					</li>
 				</ul>
 			</div>

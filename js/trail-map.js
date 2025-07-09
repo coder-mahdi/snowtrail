@@ -8,14 +8,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const tooltip = document.getElementById('tooltip');
   const tooltipName = document.getElementById('trail-tooltip-name');
   const tooltipStatus = document.getElementById('trail-tooltip-status');
+  const trailCards = document.querySelectorAll('.trail-status li');
 
   // Get trail data from data attribute
   const mapContainer = document.querySelector('.map-container');
   const trailData = mapContainer ? JSON.parse(mapContainer.dataset.trails || '{}') : {};
   
-  // Debug: log the trail data
-  console.log('Trail Data:', trailData);
-  console.log('Available trails:', Object.keys(trailData));
+  // Create a map of trail names to shapes and cards
+  const trailMap = new Map();
+  
+  shapes.forEach(shape => {
+    const trail = shape.dataset.trail;
+    if (trail) {
+      trailMap.set(trail, { shape });
+    }
+  });
+  
+  trailCards.forEach(card => {
+    const trailName = card.querySelector('strong').textContent;
+    if (trailMap.has(trailName)) {
+      trailMap.get(trailName).card = card;
+    }
+  });
 
   const showTooltip = (e, shape, trail) => {
     const status = trailData[trail];
@@ -41,33 +55,102 @@ document.addEventListener("DOMContentLoaded", () => {
     tooltip.style.transform = 'translateX(-50%)';
     tooltip.style.display = 'block';
     
-    // Debug: log the positions
-    console.log('Trail:', trail);
-    console.log('Status:', status);
-    console.log('Container bounds:', containerRect);
-    console.log('Shape bounds:', shapeRect);
-    console.log('Tooltip position:', { left: centerX, top: tooltipY });
   };
 
   const hideTooltip = () => {
     tooltip.style.display = 'none';
   };
 
+  // Function to highlight trail on map
+  const highlightTrailOnMap = (trailName) => {
+    const trailInfo = trailMap.get(trailName);
+    if (trailInfo && trailInfo.shape) {
+      trailInfo.shape.style.fill = 'rgba(255, 255, 255, 0.4)';
+      trailInfo.shape.style.stroke = '#ffffff';
+      trailInfo.shape.style.strokeWidth = '2';
+      trailInfo.shape.style.filter = 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.6))';
+      trailInfo.shape.setAttribute('data-card-hover', 'true');
+    }
+  };
+
+  // Function to remove highlight from trail on map
+  const removeTrailHighlight = (trailName) => {
+    const trailInfo = trailMap.get(trailName);
+    if (trailInfo && trailInfo.shape) {
+      trailInfo.shape.style.fill = 'transparent';
+      trailInfo.shape.style.stroke = 'transparent';
+      trailInfo.shape.style.strokeWidth = '0';
+      trailInfo.shape.style.filter = 'none';
+      trailInfo.shape.removeAttribute('data-card-hover');
+    }
+  };
+
+  // Function to highlight trail card
+  const highlightTrailCard = (trailName) => {
+    const trailInfo = trailMap.get(trailName);
+    if (trailInfo && trailInfo.card) {
+      trailInfo.card.style.transform = 'translateY(-2px)';
+      trailInfo.card.style.boxShadow = trailInfo.card.classList.contains('open') 
+        ? '0 4px 8px rgba(40, 167, 69, 0.2)' 
+        : '0 4px 8px rgba(220, 53, 69, 0.2)';
+    }
+  };
+
+  // Function to remove highlight from trail card
+  const removeTrailCardHighlight = (trailName) => {
+    const trailInfo = trailMap.get(trailName);
+    if (trailInfo && trailInfo.card) {
+      trailInfo.card.style.transform = 'translateY(0)';
+      trailInfo.card.style.boxShadow = 'none';
+    }
+  };
+
+  // Add event listeners to shapes
   shapes.forEach(shape => {
     const trail = shape.dataset.trail;
     const status = trailData[trail];
-
-    console.log('Processing shape for trail:', trail, 'Status:', status);
 
     if (status) {
       shape.classList.add(status.toLowerCase());
     }
 
-    shape.addEventListener('mouseover', (e) => showTooltip(e, shape, trail));
-    shape.addEventListener('mouseout', hideTooltip);
+    shape.addEventListener('mouseover', (e) => {
+      // Only show tooltip and highlight card if not already highlighted by card hover
+      if (!shape.hasAttribute('data-card-hover')) {
+        showTooltip(e, shape, trail);
+        highlightTrailCard(trail);
+      }
+    });
+    
+    shape.addEventListener('mouseout', () => {
+      // Only hide tooltip and remove card highlight if not highlighted by card hover
+      if (!shape.hasAttribute('data-card-hover')) {
+        hideTooltip();
+        removeTrailCardHighlight(trail);
+      }
+    });
+    
     shape.addEventListener('click', (e) => {
       showTooltip(e, shape, trail);
       setTimeout(hideTooltip, 3000);
     });
+  });
+
+  // Add event listeners to trail cards
+  trailCards.forEach(card => {
+    const trailName = card.querySelector('strong').textContent;
+    const trailInfo = trailMap.get(trailName);
+    
+    if (trailInfo && trailInfo.shape) {
+      card.addEventListener('mouseenter', () => {
+        highlightTrailOnMap(trailName);
+        showTooltip(null, trailInfo.shape, trailName);
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        removeTrailHighlight(trailName);
+        hideTooltip();
+      });
+    }
   });
 }); 

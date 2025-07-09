@@ -139,6 +139,7 @@ add_action( 'widgets_init', 'snowtrail_widgets_init' );
  * Enqueue scripts and styles.
  */
 function snowtrail_scripts() {
+	// Use compiled CSS from SASS
 	wp_enqueue_style( 'snowtrail-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'snowtrail-style', 'rtl', 'replace' );
 
